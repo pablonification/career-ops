@@ -8,6 +8,7 @@ import { ArrowLeft, Loader2, Wrench, CircleDot, Check, X } from "lucide-react";
 import { useJobs } from "@/components/jobs/job-store";
 import { HeroGlow } from "@/components/hero-glow";
 import { Badge } from "@/components/ui/badge";
+import { JobDetailTabs } from "@/components/jobs/job-detail-tabs";
 
 export default function JobPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -84,6 +85,8 @@ export default function JobPage({ params }: { params: Promise<{ id: string }> })
           </div>
         </div>
       )}
+
+      <JobDetailTabs jobId={id} />
     </div>
   );
 }
