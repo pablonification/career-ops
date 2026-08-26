@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.30.0](https://github.com/pablonification/career-ops/compare/career-ops-v1.29.0...career-ops-v1.30.0) (2026-08-26)
+
+
+### Features
+
+* **p1:** infra baseline — local Postgres, Drizzle pg, better-auth org, Tabler ([#1](https://github.com/pablonification/career-ops/issues/1)) ([e2df486](https://github.com/pablonification/career-ops/commit/e2df486f201ab1b25c029e229c65f03e579faa35))
+* **p2:** auth workspaces & tenancy with isolation ([#2](https://github.com/pablonification/career-ops/issues/2)) ([34074cf](https://github.com/pablonification/career-ops/commit/34074cf71e192c88a8794798ef60b9d6414d7086))
+* **p3:** Xendit billing with quotas and webhook idempotency ([#3](https://github.com/pablonification/career-ops/issues/3)) ([bcf263a](https://github.com/pablonification/career-ops/commit/bcf263a5f5cca07d6ecfb5aff41614b8d1329850))
+* **p4:** explore scored table and JobDetail tabs ([#4](https://github.com/pablonification/career-ops/issues/4)) ([9627c64](https://github.com/pablonification/career-ops/commit/9627c64ebbb61949ad999a2be0d338c314c9ffeb))
+* **p5:** tracker Kanban and Gmail watch ([#5](https://github.com/pablonification/career-ops/issues/5)) ([5c50251](https://github.com/pablonification/career-ops/commit/5c50251434e9e99341b435419baf20bc936f0f0a))
+
 ## [1.29.0](https://github.com/santifer/career-ops/compare/career-ops-v1.28.0...career-ops-v1.29.0) (2026-08-25)
 
 
