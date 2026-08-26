@@ -74,9 +74,11 @@ test("web Dockerfile exists", () => {
   assert.match(df, /node:22/);
 });
 
-test("web .env.local has XENDIT and better-auth env", () => {
-  assert.ok(existsSync(resolve(webRoot, ".env.local")));
-  const e = read(".env.local");
+test("web .env has XENDIT and better-auth env (example or local)", () => {
+  const hasLocal = existsSync(resolve(webRoot, ".env.local"));
+  const hasExample = existsSync(resolve(webRoot, ".env.example"));
+  assert.ok(hasLocal || hasExample, "need .env.example or .env.local");
+  const e = read(hasLocal ? ".env.local" : ".env.example");
   assert.match(e, /XENDIT_SECRET_KEY=/);
   assert.match(e, /DATABASE_URL=/);
   assert.match(e, /BETTER_AUTH_SECRET=/);
