@@ -8,6 +8,9 @@ const schema = { ...appSchema, ...authSchema };
 function resolveDatabaseUrl(): string {
   const url = process.env.DATABASE_URL;
   if (url === undefined || url.length === 0) {
+    if (process.env.CI === "true") {
+      return "postgres://app:app@localhost:5432/careerops_build_dummy";
+    }
     throw new Error("DATABASE_URL is required");
   }
   return url;
