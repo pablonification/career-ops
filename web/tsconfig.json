@@ -37,6 +37,7 @@
   ],
   "exclude": [
     "node_modules",
-    "oxlint.config.ts"
+    "oxlint.config.ts",
+    "tools/**"
   ]
 }
