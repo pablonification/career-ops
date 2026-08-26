@@ -375,6 +375,9 @@ const SYSTEM_PATHS = [
   'seed-fixture.mjs',
   'test-fixtures/',
   'upgrade-tests.mjs',
+  'oxlint.config.ts',
+  'tools/',
+  'skills-lock.json',
 ];
 
 const BOOTSTRAP_PATHS = [
