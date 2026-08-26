@@ -1,10 +1,16 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import * as schema from "./schema";
+import * as appSchema from "./schema";
+import * as authSchema from "./auth-schema";
+
+const schema = { ...appSchema, ...authSchema };
 
 function resolveDatabaseUrl(): string {
   const url = process.env.DATABASE_URL;
   if (url === undefined || url.length === 0) {
+    if (process.env.CI === "true") {
+      return "postgres://app:app@localhost:5432/careerops_build_dummy";
+    }
     throw new Error("DATABASE_URL is required");
   }
   return url;
