@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Sun, Moon } from "lucide-react";
+import { IconSun, IconMoon } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 
@@ -39,7 +39,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       title={dark ? "Light mode" : "Dark mode"}
       className={cn("text-muted", className)}
     >
-      {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+      {dark ? <IconSun className="size-4" /> : <IconMoon className="size-4" />}
     </Button>
   );
 }

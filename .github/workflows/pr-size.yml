@@ -1,0 +1,42 @@
+name: PR Size
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v8
+        with:
+          script: |
+            const labels = [
+              { name: "size:XS", color: "0e8a16", description: "0-9 lines" },
+              { name: "size:S", color: "5ebd3e", description: "10-29 lines" },
+              { name: "size:M", color: "fbca04", description: "30-99 lines" },
+              { name: "size:L", color: "fe7d37", description: "100-499 lines" },
+              { name: "size:XL", color: "d93f0b", description: "500-999 lines" },
+              { name: "size:XXL", color: "b60205", description: "1000+ lines" },
+            ];
+            for (const l of labels) {
+              try { await github.rest.issues.getLabel({owner: context.repo.owner, repo: context.repo.repo, name: l.name}); }
+              catch(e) { await github.rest.issues.createLabel({owner: context.repo.owner, repo: context.repo.repo, ...l}); }
+            }
+            const pr = context.payload.pull_request;
+            const diff = await github.rest.pulls.get({owner: context.repo.owner, repo: context.repo.repo, pull_number: pr.number, mediaType: {format: "diff"}});
+            const lines = diff.data.split("\n").filter(x=>x.startsWith("+") && !x.startsWith("+++")).length;
+            let label = "size:XXL";
+            if (lines < 10) label = "size:XS";
+            else if (lines < 30) label = "size:S";
+            else if (lines < 100) label = "size:M";
+            else if (lines < 500) label = "size:L";
+            else if (lines < 1000) label = "size:XL";
+            await github.rest.issues.removeAllLabels({owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.number}).catch(()=>{});
+            // keep only size label removal is too aggressive — just add
+            await github.rest.issues.addLabels({owner: context.repo.owner, repo: context.repo.repo, issue_number: pr.number, labels: [label]});
