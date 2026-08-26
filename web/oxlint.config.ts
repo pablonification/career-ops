@@ -23,7 +23,7 @@ export default defineConfig({
     "data/**",
   ],
   jsPlugins: [
-    { name: "anti-slop", specifier: "../tools/oxlint/anti-slop/index.ts" },
+    { name: "anti-slop", specifier: "./tools/oxlint/anti-slop/index.ts" },
   ],
   rules: {
     "anti-slop/no-chained-type-assertions": "error",
