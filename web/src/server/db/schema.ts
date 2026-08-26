@@ -25,8 +25,10 @@ export const tenants = pgTable("tenants", {
   name: text("name").notNull(),
   slug: text("slug").notNull().unique(),
   xenditCustomerId: text("xendit_customer_id"),
+  xenditInvoiceId: text("xendit_invoice_id"),
   subscriptionStatus: text("subscription_status").notNull().default("free"),
   plan: text("plan").notNull().default("free"),
+  periodEnd: timestamp("period_end", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),
@@ -60,6 +62,22 @@ export const hostedUsageCounters = pgTable(
     tenantUserPeriodActionUnique: uniqueIndex(
       "idx_hosted_usage_counters_tenant_user_period_action_unique",
     ).on(table.tenantId, table.userId, table.period, table.action),
+  }),
+);
+
+// Xendit webhook idempotency — ensures replayed callbacks are not double-processed
+export const xenditWebhookEvents = pgTable(
+  "xendit_webhook_events",
+  {
+    id: text("id").primaryKey(),
+    eventId: text("event_id").notNull().unique(),
+    tenantId: text("tenant_id").references(() => tenants.id, { onDelete: "set null" }),
+    status: text("status").notNull(),
+    payload: jsonb("payload"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => ({
+    eventIdUnique: uniqueIndex("idx_xendit_webhook_events_event_id_unique").on(table.eventId),
   }),
 );
 

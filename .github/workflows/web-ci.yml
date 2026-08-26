@@ -33,5 +33,5 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npx tsc --noEmit
-      - run: npx oxlint --config ./oxlint.config.ts src/server/db src/server/auth src/lib/nav-items.ts src/components/theme-toggle.tsx --deny-warnings
+      - run: npx oxlint --config ./oxlint.config.ts src/server/db src/server/auth src/server/billing src/lib/nav-items.ts src/lib/auth-client.ts src/app/api/billing src/components/theme-toggle.tsx src/components/auth src/app/\(auth\) --deny-warnings
       - run: npm run build
