@@ -14,7 +14,8 @@ test("drizzle.config.ts exists and uses postgresql dialect", () => {
   assert.ok(existsSync(resolve(webRoot, "drizzle.config.ts")));
   const c = read("drizzle.config.ts");
   assert.match(c, /dialect:\s*["']postgresql["']/);
-  assert.match(c, /schema:\s*["']\.\/src\/server\/db\/schema\.ts["']/);
+  assert.match(c, /schema\.ts/);
+  assert.match(c, /auth-schema\.ts/);
 });
 
 test("schema.ts defines pgTable tenants and applications with tenant scoping", () => {
