@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { ExplorerView } from "@/components/explore/explorer-view";
+import { ScoredTable } from "@/components/explore/scored-table";
 import { seedExploreFilters } from "@/lib/core/portals";
 import { readInbox, readApplications, careerOpsRoot } from "@/lib/career-ops";
 import { DEFAULT_FILTERS } from "@/lib/explore";
@@ -9,7 +10,8 @@ import { DEFAULT_FILTERS } from "@/lib/explore";
 export const dynamic = "force-dynamic";
 
 export default function ExplorePage() {
-  let seed: { filters: typeof DEFAULT_FILTERS; seededFrom: string[] } = { filters: DEFAULT_FILTERS, seededFrom: [] };
+  // SAFETY: seededFrom is string[] per seedExploreFilters contract
+  let seed = { filters: DEFAULT_FILTERS, seededFrom: [] as string[] };
   try {
     seed = seedExploreFilters();
   } catch {
@@ -22,6 +24,9 @@ export default function ExplorePage() {
     /* ignore */
   }
   return (
-    <ExplorerView seed={seed} inboxSnapshot={readInbox()} appsSnapshot={readApplications()} rootExists={rootExists} />
+    <div className="space-y-6">
+      <ScoredTable />
+      <ExplorerView seed={seed} inboxSnapshot={readInbox()} appsSnapshot={readApplications()} rootExists={rootExists} />
+    </div>
   );
 }

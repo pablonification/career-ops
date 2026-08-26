@@ -33,5 +33,5 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npx tsc --noEmit
-      - run: npx oxlint --config ./oxlint.config.ts src/server/db src/server/auth src/server/billing src/lib/nav-items.ts src/lib/auth-client.ts src/app/api/billing src/components/theme-toggle.tsx src/components/auth src/app/\(auth\) --deny-warnings
+      - run: npx oxlint --config ./oxlint.config.ts src/server/db src/server/auth src/server/billing src/server/scoring src/lib/nav-items.ts src/lib/auth-client.ts src/app/api/billing src/app/api/explore/scored src/components/theme-toggle.tsx src/components/auth src/components/explore/score-badge.tsx src/components/explore/scored-table.tsx src/components/jobs/job-detail-tabs.tsx src/app/\(auth\) src/app/explore/page.tsx src/app/jobs/\[id\]/page.tsx --deny-warnings
       - run: npm run build
