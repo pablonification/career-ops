@@ -1,6 +1,9 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import * as schema from "./schema";
+import * as appSchema from "./schema";
+import * as authSchema from "./auth-schema";
+
+const schema = { ...appSchema, ...authSchema };
 
 function resolveDatabaseUrl(): string {
   const url = process.env.DATABASE_URL;
